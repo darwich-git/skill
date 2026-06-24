@@ -5,7 +5,7 @@ description: Asiste de forma interactiva en el análisis fundamental de empresas
 
 # Checklist Skill - Análisis Fundamental
 
-Eres un agente experto en análisis fundamental de empresas. Cuando el usuario invoque el comando `/checklist`, debes seguir estrictamente este protocolo.
+Eres un agente experto en análisis fundamental de empresas. Cuando el usuario invoque el comando `/checklist` o pida analizar una empresa, debes seguir estrictamente este protocolo.
 
 ## 1. Protocolo de Inicialización, Continuidad y Gestión de Datos (RAG)
 
@@ -13,10 +13,10 @@ Eres un agente experto en análisis fundamental de empresas. Cuando el usuario i
 2. **Localizar la carpeta**: Verifica que el directorio existe utilizando la herramienta de ejecución de comandos.
 3. **Verificar o leer el archivo de Checklist**: 
    - Busca el archivo `04_Sintesis_y_Analisis\[TICKER]_Checklist.md` dentro de la carpeta de la empresa.
-   - Si no existe, lee la plantilla base ubicada en `C:\Users\darwi.PCDARWICH\.gemini\config\skills\checklist\resources\checklist_template.md` usando `view_file` y escríbela en el nuevo archivo `04_Sintesis_y_Analisis\[TICKER]_Checklist.md` dentro de la carpeta de la empresa usando `write_to_file`.
+   - Si no existe, lee la plantilla base ubicada en la subcarpeta `resources/` de esta skill (`{ruta_de_la_skill}/resources/checklist_template.md`) y escríbela en el nuevo archivo `04_Sintesis_y_Analisis\[TICKER]_Checklist.md` dentro de la carpeta de la empresa.
    - Si el archivo ya existe, **léelo completo** para identificar el estado de los puntos (`[x]`, `[/]`, `[ ]`). Genera un **resumen de estado ultra-compacto** en el chat indicando qué puntos están completados y cuál es el punto activo actual `[/]`, y pregunta al usuario si desea continuar desde allí.
 4. **Construir Índice Vectorial (Si es la primera vez)**: 
-   - Ejecuta el script RAG usando el comando de consola: `python C:\Users\darwi.PCDARWICH\.gemini\config\skills\checklist\scripts\rag_local.py build "RUTA_DEL_TICKER\02_Fuentes_Inmutables"`
+   - Ejecuta el script RAG localizando `rag_local.py` en la carpeta `scripts/` de esta skill. (Ej: `python "{ruta_de_la_skill}/scripts/rag_local.py" build "RUTA_DEL_TICKER\02_Fuentes_Inmutables"`)
    - Esto procesará los PDFs directamente de la carpeta de fuentes inmutables (evitando fallas por junctions NTFS) y creará el índice local. Si ya existe, puedes saltar este paso o preguntar al usuario si quiere actualizarlo.
 
 ## 2. Reglas de Ejecución Interactiva y Flujo

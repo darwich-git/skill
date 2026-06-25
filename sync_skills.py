@@ -1,12 +1,19 @@
 import os
 import shutil
 
-skills_root = r"D:\01_PROJECT_CODE\skills"
+# Get the repository root dynamically
+skills_root = os.path.dirname(os.path.abspath(__file__))
 dev_organiza = os.path.join(skills_root, "organiza")
 dev_checklist = os.path.join(skills_root, "checklist")
 
-agent_organiza = r"D:\.agents\skills\organiza"
-agent_checklist = r"C:\Users\darwi.PCDARWICH\.gemini\config\skills\checklist"
+user_home = os.path.expanduser("~")
+agent_checklist = os.path.join(user_home, ".gemini", "config", "skills", "checklist")
+
+# Use D:\.agents\skills\organiza if D:\ exists, otherwise fall back to global config folder
+if os.path.exists("D:\\"):
+    agent_organiza = os.path.join("D:\\", ".agents", "skills", "organiza")
+else:
+    agent_organiza = os.path.join(user_home, ".gemini", "config", "skills", "organiza")
 
 def sync_folder(src, dest):
     if not os.path.exists(src):
